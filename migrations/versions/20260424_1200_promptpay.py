@@ -28,16 +28,30 @@ def upgrade() -> None:
         sa.Column("invoice_no", sa.String(length=64), nullable=False, unique=True),
         sa.Column("merchant_promptpay_id", sa.String(length=32), nullable=False),
         sa.Column("amount", sa.Numeric(14, 2), nullable=False),
-        sa.Column("currency", sa.String(length=3), nullable=False, server_default="THB"),
+        sa.Column(
+            "currency", sa.String(length=3), nullable=False, server_default="THB"
+        ),
         sa.Column("reference", sa.String(length=32), nullable=False),
         sa.Column("qr_payload", sa.String(length=512), nullable=False),
-        sa.Column("status", sa.String(length=24), nullable=False, server_default="pending"),
+        sa.Column(
+            "status", sa.String(length=24), nullable=False, server_default="pending"
+        ),
         sa.Column("matched_bank", sa.String(length=16), nullable=True),
         sa.Column("matched_bank_tx_id", sa.String(length=64), nullable=True),
         sa.Column("expires_at", sa.DateTime(timezone=True), nullable=True),
         sa.Column("paid_at", sa.DateTime(timezone=True), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
-        sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("now()"),
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("now()"),
+        ),
     )
     op.create_index(
         "ix_promptpay_payments_reference",

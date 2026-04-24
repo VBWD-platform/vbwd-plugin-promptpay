@@ -41,9 +41,7 @@ class PromptPayService:
             amount=amount,
             reference=reference,
         )
-        expires_at = datetime.now(timezone.utc) + timedelta(
-            minutes=expiry_minutes
-        )
+        expires_at = datetime.now(timezone.utc) + timedelta(minutes=expiry_minutes)
         payment = PromptPayPayment(
             invoice_no=invoice_no,
             merchant_promptpay_id=merchant_promptpay_id,

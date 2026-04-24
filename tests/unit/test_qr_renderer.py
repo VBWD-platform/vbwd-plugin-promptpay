@@ -28,9 +28,7 @@ class TestRenderPromptPayQr:
         assert qr[-8:-4] == "6304"
 
     def test_reference_field_included(self):
-        qr = render_promptpay_qr(
-            "0123456789012", Decimal("100.00"), reference="INV-1"
-        )
+        qr = render_promptpay_qr("0123456789012", Decimal("100.00"), reference="INV-1")
         assert "INV-1" in qr
 
     def test_no_reference_omits_tag_62(self):

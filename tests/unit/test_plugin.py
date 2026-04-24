@@ -10,9 +10,7 @@ class TestPromptPayPlugin:
 
     def test_deep_merge_preserves_other_banks(self):
         plugin = PromptPayPlugin()
-        plugin.initialize(
-            {"bank_credentials": {"kbank": {"api_key": "KB-X"}}}
-        )
+        plugin.initialize({"bank_credentials": {"kbank": {"api_key": "KB-X"}}})
         assert plugin.status == PluginStatus.INITIALIZED
         assert plugin._config["bank_credentials"]["kbank"]["api_key"] == "KB-X"
         assert "scb" in plugin._config["bank_credentials"]

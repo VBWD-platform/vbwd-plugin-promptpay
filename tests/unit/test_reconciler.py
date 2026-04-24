@@ -27,7 +27,9 @@ class TestMatchByReference:
         payment.reference = "REF-1"
 
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = payment
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            payment
+        )
 
         reconciler = PromptPayReconciler(session=session)
         bt = _make_bank_tx(Decimal("100.00"), reference="REF-1")
@@ -43,7 +45,9 @@ class TestMatchByReference:
         payment.amount = Decimal("200.00")
 
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = payment
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            payment
+        )
         session.query.return_value.filter.return_value.all.return_value = []
 
         reconciler = PromptPayReconciler(session=session)
@@ -61,7 +65,9 @@ class TestAmountWindowFallback:
         payment.amount = Decimal("100.00")
 
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = None
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            None
+        )
         session.query.return_value.filter.return_value.all.return_value = [payment]
 
         reconciler = PromptPayReconciler(session=session, match_window_minutes=5)
@@ -73,7 +79,9 @@ class TestAmountWindowFallback:
 
     def test_ambiguous_multiple_candidates_no_match(self):
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = None
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            None
+        )
         session.query.return_value.filter.return_value.all.return_value = [
             MagicMock(),
             MagicMock(),
@@ -85,7 +93,9 @@ class TestAmountWindowFallback:
 
     def test_zero_candidates_no_match(self):
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = None
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            None
+        )
         session.query.return_value.filter.return_value.all.return_value = []
 
         reconciler = PromptPayReconciler(session=session)

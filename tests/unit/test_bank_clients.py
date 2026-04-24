@@ -41,9 +41,7 @@ class TestKBank:
 
     def test_extract_without_memo_null_reference(self):
         rc = KBankReconciler(webhook_secret="kb-secret")
-        bt = rc.extract_transaction(
-            {"transactionRef": "KB123", "amount": "100.00"}
-        )
+        bt = rc.extract_transaction({"transactionRef": "KB123", "amount": "100.00"})
         assert bt.reference is None
 
     def test_extract_raises_on_malformed(self):
