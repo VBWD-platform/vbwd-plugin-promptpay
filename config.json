@@ -1,0 +1,8 @@
+{
+  "sandbox": { "type": "boolean", "default": true, "description": "Sandbox mode" },
+  "merchant_promptpay_id": { "type": "string", "default": "", "description": "Thai national ID / tax ID / phone" },
+  "enabled_banks": { "type": "array", "default": ["kbank", "scb"], "description": "Banks we reconcile against" },
+  "qr_expiry_minutes": { "type": "integer", "default": 10, "description": "QR validity window" },
+  "reconcile_match_window_minutes": { "type": "integer", "default": 5, "description": "Amount+timestamp fallback window" },
+  "currency": { "type": "string", "default": "THB", "description": "THB only" }
+}

@@ -1,0 +1,21 @@
+{
+  "tabs": [
+    {
+      "id": "merchant",
+      "label": "Merchant",
+      "fields": [
+        { "key": "merchant_promptpay_id", "label": "PromptPay ID (national ID / tax ID / phone)", "component": "input", "inputType": "text" },
+        { "key": "qr_expiry_minutes", "label": "QR expiry (minutes)", "component": "input", "inputType": "number" },
+        { "key": "reconcile_match_window_minutes", "label": "Match window (minutes)", "component": "input", "inputType": "number" }
+      ]
+    },
+    {
+      "id": "banks",
+      "label": "Bank credentials",
+      "fields": [
+        { "key": "bank_credentials.kbank.webhook_secret", "label": "KBank webhook secret", "component": "input", "inputType": "password" },
+        { "key": "bank_credentials.scb.webhook_secret", "label": "SCB webhook secret", "component": "input", "inputType": "password" }
+      ]
+    }
+  ]
+}
