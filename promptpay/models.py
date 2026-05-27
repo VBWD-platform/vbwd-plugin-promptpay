@@ -1,12 +1,11 @@
 """PromptPay payment + matched-bank-tx models."""
-from datetime import datetime, timezone
-
 from sqlalchemy import Column, DateTime, Numeric, String
 
 from vbwd.extensions import db
+from vbwd.models.base import TzAwareTimestampMixin
 
 
-class PromptPayPayment(db.Model):
+class PromptPayPayment(TzAwareTimestampMixin, db.Model):
     __tablename__ = "promptpay_payments"
 
     id = Column(
@@ -25,17 +24,7 @@ class PromptPayPayment(db.Model):
     matched_bank_tx_id = Column(String(64), nullable=True, index=True)
     expires_at = Column(DateTime(timezone=True), nullable=True)
     paid_at = Column(DateTime(timezone=True), nullable=True)
-    created_at = Column(
-        DateTime(timezone=True),
-        nullable=False,
-        default=lambda: datetime.now(timezone.utc),
-    )
-    updated_at = Column(
-        DateTime(timezone=True),
-        nullable=False,
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
-    )
+    # created_at / updated_at provided by TzAwareTimestampMixin (S20).
 
     def to_dict(self) -> dict:
         return {
