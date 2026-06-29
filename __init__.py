@@ -52,7 +52,7 @@ class PromptPayPlugin(BasePlugin, PayoutProvider):
     def metadata(self) -> PluginMetadata:
         return PluginMetadata(
             name="promptpay",
-            version="26.6",
+            version="26.6.1",
             author="VBWD Team",
             description=(
                 "Direct PromptPay (Thailand) — EMVCo QR issuance + Thai "
