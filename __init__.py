@@ -2,7 +2,7 @@
 from decimal import Decimal
 from typing import Optional, Dict, Any, List, TYPE_CHECKING
 
-from vbwd.plugins.base import BasePlugin, PluginMetadata
+from vbwd.plugins.base import BasePlugin, PluginMetadata, PublicRouteDeclaration
 from vbwd.plugins.payment_provider import PayoutError, PayoutProvider, PayoutResult
 
 if TYPE_CHECKING:
@@ -64,6 +64,14 @@ class PromptPayPlugin(BasePlugin, PayoutProvider):
     def initialize(self, config: Optional[Dict[str, Any]] = None) -> None:
         merged = _deep_merge(DEFAULT_CONFIG, config or {})
         super().initialize(merged)
+
+    def declare_public_routes(self) -> PublicRouteDeclaration:
+        """Public PromptPay bank webhook (verified by provider signature)."""
+        return PublicRouteDeclaration(
+            mutation={
+                "/api/v1/plugins/promptpay/webhooks/<bank>": "PromptPay bank webhook; provider-signature verified.",
+            },
+        )
 
     def get_blueprint(self) -> Optional["Blueprint"]:
         from plugins.promptpay.promptpay.routes import promptpay_plugin_bp
